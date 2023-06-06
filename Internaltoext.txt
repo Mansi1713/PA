@@ -1,0 +1,48 @@
+#include <stdio.h>
+
+#define MAX_SIZE 100
+
+void internalToInternalTransfer(int* src, int* dest, int size) {
+    int i;
+    for (i = 0; i < size; i++) {
+        dest[i] = src[i];
+    }
+}
+
+void internalToExternalTransfer(int* src, int* dest, int size) {
+    int i;
+    for (i = 0; i < size; i++) {
+        *(dest + i) = *(src + i);
+    }
+}
+
+int main() {
+    int sourceArray[MAX_SIZE];
+    int destinationArray[MAX_SIZE];
+    int n, i;
+
+    printf("Enter the number of elements (n): ");
+    scanf("%d", &n);
+
+    printf("Enter the elements of the source array:\n");
+    for (i = 0; i < n; i++) {
+        scanf("%d", &sourceArray[i]);
+    }
+
+    internalToInternalTransfer(sourceArray, destinationArray, n);
+    printf("Elements transferred from internal to internal memory:\n");
+    for (i = 0; i < n; i++) {
+        printf("%d ", destinationArray[i]);
+    }
+    printf("\n");
+
+    int externalArray[MAX_SIZE];
+    internalToExternalTransfer(sourceArray, externalArray, n);
+    printf("Elements transferred from internal to external memory:\n");
+    for (i = 0; i < n; i++) {
+        printf("%d ", externalArray[i]);
+    }
+    printf("\n");
+
+    return 0;
+}
